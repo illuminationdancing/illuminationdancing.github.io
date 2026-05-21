@@ -149,3 +149,39 @@ h1 {
         font-size: 0.9rem;
     }
 }
+/* Kindness toast message */
+.kindness-toast {
+    position: fixed;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%) translateY(100px);
+    background: rgba(0, 0, 0, 0.8);
+    backdrop-filter: blur(12px);
+    color: white;
+    padding: 1rem 2rem;
+    border-radius: 60px;
+    font-size: 1.2rem;
+    font-weight: 500;
+    text-align: center;
+    z-index: 1000;
+    opacity: 0;
+    transition: all 0.4s ease;
+    pointer-events: none;
+    font-family: 'Inter', sans-serif;
+    white-space: nowrap;
+}
+
+.kindness-toast.show {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+}
+
+@media (max-width: 600px) {
+    .kindness-toast {
+        font-size: 1rem;
+        padding: 0.75rem 1.5rem;
+        bottom: 20px;
+        white-space: normal;
+        width: 80%;
+    }
+}

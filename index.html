@@ -1,25 +1,208 @@
 <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>Sabina Socoli | Cybersecurity & QA Portfolio</title>
+    
+    <!-- Google Fonts: Crisp, clean, mountain aesthetic -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-<html>
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title>ID</title>
-        <meta name="description" content="">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" href="style.css">
-        
-    </head>
-    <body>
-        <h1>ILLUMINATION DANCING BABY, TA DA</h1>
-        <section>
-            <img src="Art of peace.jpeg">
-            <p>Image on the side 1</p>
-            <img src="The way.png">
-            <p>Image on the side 2</p>
+        body {
+            font-family: 'Inter', sans-serif;
+            height: 100vh;
+            width: 100vw;
+            overflow: hidden;
+            position: relative;
+        }
 
-        </section>
-       
-        <script src="" async defer></script>
-    </body>
+        /* Full-screen mountain background */
+        .hero {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('Art of peace JPEG');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+
+        /* Semi-transparent overlay for text readability */
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.25);
+            z-index: 1;
+        }
+
+        /* All content sits above the overlay */
+        .content {
+            position: relative;
+            z-index: 2;
+            padding: 2rem;
+            max-width: 700px;
+            width: 90%;
+        }
+
+        /* Name styling */
+        h1 {
+            font-size: clamp(2.5rem, 8vw, 4.5rem);
+            font-weight: 700;
+            color: white;
+            letter-spacing: -0.02em;
+            margin-bottom: 2rem;
+            text-shadow: 0 2px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Project links container */
+        .projects {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            margin-bottom: 2.5rem;
+        }
+
+        /* Each project link */
+        .project-link {
+            font-size: clamp(1.1rem, 4vw, 1.4rem);
+            font-weight: 500;
+            color: white;
+            text-decoration: none;
+            padding: 0.75rem 1.5rem;
+            background: rgba(255, 255, 255, 0.12);
+            backdrop-filter: blur(4px);
+            border-radius: 50px;
+            transition: all 0.3s ease;
+            display: inline-block;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            letter-spacing: -0.01em;
+        }
+
+        .project-link:hover {
+            background: rgba(255, 255, 255, 0.25);
+            backdrop-filter: blur(8px);
+            transform: scale(1.02);
+            border-color: rgba(255, 255, 255, 0.4);
+        }
+
+        /* Buttons container */
+        .buttons {
+            display: flex;
+            gap: 1.2rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 0.5rem;
+        }
+
+        .btn {
+            font-size: 1rem;
+            font-weight: 600;
+            padding: 0.7rem 1.8rem;
+            border-radius: 50px;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            display: inline-block;
+        }
+
+        .btn-primary {
+            background: white;
+            color: #1a3c34;
+            border: none;
+        }
+
+        .btn-primary:hover {
+            background: #f0f0f0;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: white;
+            border: 2px solid white;
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.15);
+            transform: translateY(-2px);
+        }
+
+        /* Small footer note (optional, very subtle) */
+        .footer-note {
+            position: absolute;
+            bottom: 15px;
+            left: 0;
+            right: 0;
+            text-align: center;
+            font-size: 0.7rem;
+            color: rgba(255, 255, 255, 0.5);
+            z-index: 2;
+            font-weight: 400;
+        }
+
+        .footer-note a {
+            color: rgba(255, 255, 255, 0.6);
+            text-decoration: none;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 600px) {
+            .content {
+                width: 95%;
+                padding: 1rem;
+            }
+            .project-link {
+                padding: 0.6rem 1.2rem;
+                font-size: 1rem;
+            }
+            .btn {
+                padding: 0.5rem 1.4rem;
+                font-size: 0.9rem;
+            }
+            .buttons {
+                gap: 0.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="hero">
+        <div class="content">
+            <h1>Sabina Socoli</h1>
+            
+            <div class="projects">
+                <a href="#" class="project-link" target="_blank">💛 Kindness App Python — .exe download (coming soon)</a>
+                <a href="#" class="project-link" target="_blank">🍲 Recipe App Python — View project</a>
+                <a href="#" class="project-link" target="_blank">🔐 Password Strength Tester Go — View project</a>
+            </div>
+            
+            <div class="buttons">
+                <a href="#" class="btn btn-primary" download>📄 Download CV</a>
+                <a href="https://linkedin.com/in/sabinasocoli" class="btn btn-secondary" target="_blank">🔗 LinkedIn</a>
+            </div>
+        </div>
+        <div class="footer-note">
+            ✦ Open to QA & entry-level cybersecurity roles ✦
+        </div>
+    </div>
+</body>
 </html>

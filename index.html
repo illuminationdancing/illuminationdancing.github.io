@@ -22,3 +22,43 @@ title: Sabina Socoli | QA & Cybersecurity Portfolio
         ✦ Open to QA & entry-level cybersecurity roles ✦
     </div>
 </div>
+
+<script>
+// Kindness App: Load messages and show random kindness
+let kindnessMessages = [];
+
+fetch('https://raw.githubusercontent.com/illuminationdancing/illuminationdancing/main/kindness_messages.json')
+    .then(response => response.json())
+    .then(data => {
+        kindnessMessages = data;
+        console.log('Loaded ' + kindnessMessages.length + ' kindness messages');
+    })
+    .catch(error => {
+        console.error('Error loading kindness messages:', error);
+        kindnessMessages = ["You are brilliant", "You are kind", "You are amazing"];
+    });
+
+function showRandomKindness() {
+    if (kindnessMessages.length === 0) {
+        console.warn('No messages loaded yet');
+        return;
+    }
+    
+    const randomIndex = Math.floor(Math.random() * kindnessMessages.length);
+    const message = kindnessMessages[randomIndex];
+    
+    let toast = document.querySelector('.kindness-toast');
+    if (!toast) {
+        toast = document.createElement('div');
+        toast.className = 'kindness-toast';
+        document.body.appendChild(toast);
+    }
+    
+    toast.textContent = message;
+    toast.classList.add('show');
+    
+    setTimeout(() => {
+        toast.classList.remove('show');
+    }, 5000);
+}
+</script>

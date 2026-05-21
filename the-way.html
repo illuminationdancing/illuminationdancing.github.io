@@ -1,0 +1,68 @@
+---
+layout: default
+title: The Way | Password Strength Tester
+---
+
+<div class="hero" style="background-image: url('The way.png'); background-size: cover; background-position: center;">
+    <div class="content">
+        <h1>🗝️ THE WAY</h1>
+        <p style="color: rgba(255,255,255,0.8); margin-bottom: 2rem; font-style: italic;">Prove your password is worthy</p>
+        
+        <input type="password" id="passwordInput" placeholder="Enter your password..." 
+               style="width: 100%; padding: 1rem; font-size: 1rem; background: rgba(0,0,0,0.6); border: 2px solid rgba(255,255,255,0.3); border-radius: 60px; color: white; font-family: monospace; margin-bottom: 1rem;">
+        
+        <button id="testButton" class="btn btn-primary" style="width: 100%; margin-bottom: 2rem;">Test the Gates</button>
+        
+        <div id="resultArea" style="background: rgba(0,0,0,0.6); border-radius: 24px; padding: 1.5rem; font-family: monospace; font-size: 0.9rem; color: #e0e0e0; white-space: pre-wrap; border-left: 4px solid #4a90e2; max-height: 500px; overflow-y: auto;">
+            <!-- Your Go code's output will appear here -->
+        </div>
+        <div id="status" style="text-align: center; margin-top: 1rem; font-size: 0.75rem; color: rgba(255,255,255,0.4);">
+            ⚙️ Loading The Way... (first load takes 5-10 seconds)
+        </div>
+    </div>
+</div>
+
+<script src="wasm_exec.js"></script>
+<script>
+    const go = new Go();
+    let wasmReady = false;
+
+    async function loadWasm() {
+        try {
+            const result = await WebAssembly.instantiateStreaming(
+                fetch('the-way.wasm'),
+                go.importObject
+            );
+            go.run(result.instance);
+            wasmReady = true;
+            document.getElementById('status').innerHTML = '🔓 The Way is open. Enter your password.';
+            document.getElementById('status').style.color = '#4ade80';
+        } catch (err) {
+            console.error(err);
+            document.getElementById('status').innerHTML = '❌ Failed to load The Way. Check the console.';
+        }
+    }
+
+    loadWasm();
+
+    function testPassword() {
+        if (!wasmReady) {
+            document.getElementById('resultArea').innerHTML = '⏳ The Way is still loading. Wait a moment...';
+            return;
+        }
+
+        const password = document.getElementById('passwordInput').value;
+        if (!password) {
+            document.getElementById('resultArea').innerHTML = '❌ Enter a password first.';
+            return;
+        }
+
+        const result = checkPasswordGo(password);
+        document.getElementById('resultArea').innerHTML = result.replace(/\n/g, '<br>');
+    }
+
+    document.getElementById('testButton').addEventListener('click', testPassword);
+    document.getElementById('passwordInput').addEventListener('keypress', function(e) {
+        if (e.key === 'Enter') testPassword();
+    });
+</script>
